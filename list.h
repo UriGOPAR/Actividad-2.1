@@ -1,8 +1,8 @@
 // =================================================================
 //
 // File: list.h
-// Author:
-// Date:
+// Author: Uri Jared Gopar Morales
+// Date: 26/09/2022
 // 
 // =================================================================
 #ifndef LIST_H
@@ -13,7 +13,7 @@
 #include "exception.h"
 #include "header.h"
 
-template <class T> class List;
+template <class T> class List;	
 
 // =================================================================
 // Definition of the Node class
@@ -48,7 +48,7 @@ Node<T>::Node(T val) : value(val), next(NULL) {
 // =================================================================
 template <class T>
 Node<T>::Node(T val, Node* nxt) : value(val), next(nxt) {
-}
+}	
 
 // =================================================================
 // Definition of the List class
@@ -226,7 +226,14 @@ T List<T>::get(uint index) const {
 	T aux;
 
 	// TO DO
-	return aux;
+	Node<T> *recorre=head;
+	if (index >= size){
+		throw IndexOutOfBounds();
+	}
+	for (int i=0; i<index; i++){
+		recorre =recorre->next;
+	}
+	return 	recorre->value;
 }
 
 // =================================================================
