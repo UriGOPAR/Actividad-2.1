@@ -226,14 +226,22 @@ T List<T>::get(uint index) const {
 	T aux;
 
 	// TO DO
-	Node<T> *recorre=head;
+	Node<T> *recorre;
 	if (index >= size){
 		throw IndexOutOfBounds();
 	}
-	for (int i=0; i<index; i++){
-		recorre =recorre->next;
+	uint cuenta=0;
+	recorre=head;
+	while(recorre->next!=NULL){
+		if(cuenta==index){
+			aux=recorre->value;
+			return aux;
+		}
+		recorre=recorre->next;
+		cuenta++;
 	}
-	return 	recorre->value;
+	aux=recorre->value;
+	return aux;
 }
 
 // =================================================================
@@ -370,6 +378,27 @@ template <class T>
 T List<T>::remove_at(uint index) {
 	T aux;
 	// TO DO
+	if (index >=size ){
+		throw IndexOutOfBounds();
+	}
+	Node<T> *borrar;
+	if (index == 0){
+		borrar=head;
+		head=head->next;
+		aux=borrar->value;
+		delete borrar;
+		size--;
+		return aux;
+	}
+	Node<T> *recorre=head;
+	for (int i=0; i<index -1;i ++){
+		recorre=recorre->next;
+	}
+	borrar=recorre->next;
+	recorre->next=recorre->next->next;
+	delete borrar;
+	size--;
+
 	return aux;
 }
 
@@ -382,7 +411,23 @@ T List<T>::remove_at(uint index) {
 template <class T>
 long int List<T>::indexOf(T val) const {
 	// TO DO
+	Node<T> *p;
+	long int i=0;
+	p=head;
+	while (p->next !=NULL){
+		if(p->value==val){
+			return i;
+		}
+		p=p->next;
+		i++;
+	}
+	if (p->value==val){
+		return i;
+
+	}
+	else{
+
 	return -1;
 }
-
+}
 #endif /* LIST_H */
