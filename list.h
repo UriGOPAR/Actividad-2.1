@@ -283,6 +283,21 @@ void List<T>::push_back(T val) {
 template <class T>
 void List<T>::insert_at(T val, uint index) {
 	// TO DO
+	if (index > size){
+		throw IndexOutOfBounds();
+	}
+	if (index==0){
+		head= new Node <T> (val, head);
+		size++;
+		return;
+	}
+	Node <T> *recorre =head;
+	for (int i =0; i<index - 1; i++){
+		recorre=recorre->next;
+	}
+	Node<T> *insert= new Node<T>(val, recorre->next);
+	recorre->next=insert;
+	size++;
 }
 
 // =================================================================
